@@ -1,3 +1,11 @@
+body {
+    color: white;
+}
+
+.top {
+    display: inline-block;
+}
+
 #canvas {
     position: relative;
     background-color: black;
@@ -7,17 +15,29 @@
     margin: 0 auto;
 }
 
-#main {
+table {
+    margin: 0 auto;
+}
+
+.main {
     top: 80px;
-    left: 115px;
+    left: 110px;
     background-color: brown;
-    position: absolute;
+    margin: 10px;
 }
 
 .alien {
-    display: inline-block;
     width: 30px;
     height: 30px;
     background-color: aliceblue;
 
+}
+
+#spaceShip {
+    position: absolute;
+    bottom: 10px;
+    left: 285px;
+    background-color: white;
+    width: 30px;
+    height: 30px;
 }
