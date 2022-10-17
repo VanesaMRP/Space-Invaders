@@ -41,6 +41,12 @@ body {
     height: 30px;
 }
 
+.shoot{
+    width: 5px;
+    height: 10px;
+    background-color: red;
+}
+
 #start {
     width: 50px;
     margin: 20px auto;
