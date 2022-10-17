@@ -1,0 +1,53 @@
+body {
+    color: white;
+}
+
+.top {
+    display: inline-block;
+    border: 2px solid white;
+    padding: 3px;
+}
+
+#canvas {
+    position: relative;
+    background-color: black;
+    width: 600px;
+    height: 600px;
+    padding: 5px;
+    margin: 0 auto;
+}
+
+#table {
+    position: absolute;
+    margin-top: 20px;
+}
+
+
+
+
+.aliens {
+    width: 30px;
+    height: 30px;
+    background-color: aliceblue;
+
+}
+
+.spaceShip {
+    position: absolute;
+    bottom: 10px;
+    left: 285px;
+    background-color: white;
+    width: 30px;
+    height: 30px;
+}
+
+.shoot{
+    width: 5px;
+    height: 10px;
+    background-color: red;
+}
+
+#start {
+    width: 50px;
+    margin: 20px auto;
+}
