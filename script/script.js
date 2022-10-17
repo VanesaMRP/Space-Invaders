@@ -3,16 +3,14 @@ var direction = 1
 var left = 15
 var table = document.getElementById('table');
 var button = document.getElementById('button')
-var spaceShip = document.getElementById('spaceShip')
+var spaceShip = document.getQueryselector('.spaceShip')
 var timerId;
 
 spaceShip = {
-    x:285,
-    y:560,
+    x:10,
+    y:16,
     dir: 'left'
 }
-
-
 
 var moveAliens = function (){
 
@@ -26,6 +24,7 @@ function moveSpaceShip () {
         spaceShip.x++
     }
 }
+
 
 
 button.addEventListener('click', function (e){

@@ -5,6 +5,7 @@ body {
 .top {
     display: inline-block;
     border: 2px solid white;
+    padding: 3px;
 }
 
 #canvas {
@@ -31,7 +32,7 @@ body {
 
 }
 
-#spaceShip {
+.spaceShip {
     position: absolute;
     bottom: 10px;
     left: 285px;
