@@ -16,15 +16,11 @@ body {
 }
 
 table {
-    margin: 0 auto;
+    position: absolute;
+    margin-top: 20px;
 }
 
-.main {
-    top: 80px;
-    left: 110px;
-    background-color: brown;
-    margin: 10px;
-}
+
 
 .alien {
     width: 30px;
@@ -40,4 +36,9 @@ table {
     background-color: white;
     width: 30px;
     height: 30px;
+}
+
+#start {
+    width: 50px;
+    margin: 20px auto;
 }
