@@ -1,0 +1,23 @@
+#canvas {
+    position: relative;
+    background-color: black;
+    width: 600px;
+    height: 600px;
+    padding: 5px;
+    margin: 0 auto;
+}
+
+#main {
+    top: 80px;
+    left: 115px;
+    background-color: brown;
+    position: absolute;
+}
+
+.alien {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-color: aliceblue;
+
+}
