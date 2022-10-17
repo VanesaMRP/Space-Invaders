@@ -4,6 +4,7 @@ body {
 
 .top {
     display: inline-block;
+    border: 2px solid white;
 }
 
 #canvas {
@@ -15,21 +16,22 @@ body {
     margin: 0 auto;
 }
 
-table {
+#table {
     position: absolute;
     margin-top: 20px;
 }
 
 
 
-.alien {
+
+.aliens {
     width: 30px;
     height: 30px;
     background-color: aliceblue;
 
 }
 
-#spaceShip {
+.spaceShip {
     position: absolute;
     bottom: 10px;
     left: 285px;
