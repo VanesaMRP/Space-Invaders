@@ -1,6 +1,5 @@
 var moving = false
 var direction = 1
-var table = document.getElementById('table');
 var button = document.getElementById('button')
 var spaceShip = document.querySelector('.spaceShip')
 var timerId;
@@ -8,7 +7,7 @@ var timerId3;
 var shoot = document.getElementsByClassName('shoot')
 
 var alien = {
-    x: 5,
+    x: 1,
     y: 1,
     direction: 1
 }
@@ -18,36 +17,29 @@ var space = {
     y: 16,
     direction: null,
 }
+
 var shootSpace = {
-    x: space.x,
-    y: 15
+    x: 0,
+    y: 0
 }
-
-
 // mover la nave
 
 function drawShip() {
     var shipCell = document.querySelector(`.row${space.y} .col${space.x}`)
-    console.log(shipCell)
     shipCell.classList.add('spaceShip')
 }
 
 function removeShip() {
     var shipCell2 = document.querySelector('.spaceShip')
-    console.log(shipCell2)
     shipCell2.classList.remove('spaceShip')
 }
 
 function moveSpaceShip() {
     if (space.direction === 'left' && space.x > 1) {
         space.x--
-        //shootSpace.x--
-        console.log('left')
     }
     if (space.direction === 'right' && space.x < 19) {
         space.x++
-        //shootSpace.x++
-        console.log('right')
     }
 }
 
@@ -55,19 +47,19 @@ function moveSpaceShip() {
 
 function drawShoot() {
     var shootCell = document.querySelector(`.row${shootSpace.y} .col${shootSpace.x}`)
-    console.log(shootCell)
     shootCell.classList.add('shoot')
 }
 
 function removeShoot() {
-    var shootCell2 = document.querySelector('.shoot')
-    shootCell2.classList.remove('shoot')
+    var shootCell = document.querySelector('.shoot')
+    shootCell.classList.remove('shoot')
 }
 
 function moveShoot() {
     if (shootSpace.y === 0) {
         shootSpace.y = null
         shootSpace.x = null
+        //clearInterval(timerId3)
     } else {
         drawShoot()
         removeShoot()
@@ -76,37 +68,16 @@ function moveShoot() {
     }
 }
 
-function reShoot() {
-    if (shootSpace.y === 1) {
-        clearInterval(timerId)
-        var cleanShoot = setTimeout(removeShoot, 200)
+// collision and explode
+
+function checkHit() {
+    var shootCell = document.querySelector('.shoot')
+    if (shootCell.classList.contains('aliens')) {
+        shootCell.classList.remove('aliens')
+        shootCell.classList.remove('shoot')
+        shootSpace.y = null
+        shootSpace.x = null
     }
-}
-
-// mover aliens
-
-var moveAliens = function () {
-    var aliens = document.getElementsByClassName('aliens')
-    if (alien.x >= 19 || alien.x < 1) { alien.direction *= -1 }
-    aliens.classList.remove('aliens')
-    alien.x += 1 * alien.direction
-    aliens.classList.add('aliens')
-}
-
-// que comience el juego
-
-function startGame() {
-    var gameTimer = setInterval(function () {
-        removeShip()
-        moveSpaceShip()
-        drawShip()
-    }, 200)
-    var gameShoot = setInterval(function(){
-        moveShoot()
-    }, 200)
-/*     if (shootSpace.x !== null) {
-       
-    } */
 }
 
 window.addEventListener('keydown', function (e) {
@@ -134,15 +105,46 @@ window.addEventListener('keyup', function (e) {
 })
 
 
+// mover aliens
+
+function alienMovement() {
+    timerId = setInterval(function () {
+        //devuelve array
+        var alienCell = document.querySelectorAll(`.aliens`)
+        console.log(alienCell)
+        alienCell.forEach(function (et) {
+            et.classList.remove('aliens')
+            var row = et.parentNode.getAttribute('class')
+            var col = et.getAttribute('class')
+            var cel = document.querySelector(`.row${parseInt(row[row.length-1]+1)} .${col}`)
+            cel.classList.add('aliens')
+            console.log(row, col, cel, row.length)
+        })
 
 
-/* button.addEventListener('click', function (e) {
-    if (!moving) {
-       // timerId3 = setInterval(moveAliens , 500)
-       moveAliens
-    } else {
-        clearInterval(timerId)
-    }
-}) */
+    }, 1000)
+}
 
-startGame()
+
+// que comience el juego
+
+function startGame() {
+
+    var gameTimer = setInterval(function () {
+        removeShip()
+        moveSpaceShip()
+        drawShip()
+    }, 200)
+    var gameShoot = setInterval(function () {
+        moveShoot()
+        checkHit()
+    }, 200)
+
+}
+
+button.addEventListener('click', function (e) {
+    startGame()
+    alienMovement()
+})
+
+
