@@ -1,22 +1,31 @@
 var moving = false
 var direction = 1
-var left = 15
 var table = document.getElementById('table');
 var button = document.getElementById('button')
 var spaceShip = document.querySelector('.spaceShip')
 var timerId;
+var timerId3;
 var shoot = document.getElementsByClassName('shoot')
+
+var alien = {
+    x: 5,
+    y: 1,
+    direction: 1
+}
 
 var space = {
     x: 10,
     y: 16,
-    direction: 'left',
+    direction: null,
 }
 var shootSpace = {
-    x: 10,
-    y: 15,
-    direction: 'up',
+    x: space.x,
+    y: 15
 }
+
+
+// mover la nave
+
 function drawShip() {
     var shipCell = document.querySelector(`.row${space.y} .col${space.x}`)
     console.log(shipCell)
@@ -35,19 +44,31 @@ function moveSpaceShip() {
         //shootSpace.x--
         console.log('left')
     }
-    if (space.direction === 'rigth' && space.x < 19) {
+    if (space.direction === 'right' && space.x < 19) {
         space.x++
         //shootSpace.x++
         console.log('right')
     }
 }
+
+// disparar
+
 function drawShoot() {
     var shootCell = document.querySelector(`.row${shootSpace.y} .col${shootSpace.x}`)
     console.log(shootCell)
     shootCell.classList.add('shoot')
 }
-    var moveShoot = function() {
-    if (shootSpace.direction === 'up' && shootSpace.y > 1) {
+
+function removeShoot() {
+    var shootCell2 = document.querySelector('.shoot')
+    shootCell2.classList.remove('shoot')
+}
+
+function moveShoot() {
+    if (shootSpace.y === 0) {
+        shootSpace.y = null
+        shootSpace.x = null
+    } else {
         drawShoot()
         removeShoot()
         shootSpace.y--
@@ -55,56 +76,73 @@ function drawShoot() {
     }
 }
 
-function removeShoot (){
-    var shootCell2 = document.querySelector('.shoot')
-    shootCell2.classList.remove('shoot')
+function reShoot() {
+    if (shootSpace.y === 1) {
+        clearInterval(timerId)
+        var cleanShoot = setTimeout(removeShoot, 200)
+    }
+}
+
+// mover aliens
+
+var moveAliens = function () {
+    var aliens = document.getElementsByClassName('aliens')
+    if (alien.x >= 19 || alien.x < 1) { alien.direction *= -1 }
+    aliens.classList.remove('aliens')
+    alien.x += 1 * alien.direction
+    aliens.classList.add('aliens')
+}
+
+// que comience el juego
+
+function startGame() {
+    var gameTimer = setInterval(function () {
+        removeShip()
+        moveSpaceShip()
+        drawShip()
+    }, 200)
+    var gameShoot = setInterval(function(){
+        moveShoot()
+    }, 200)
+/*     if (shootSpace.x !== null) {
+       
+    } */
 }
 
 window.addEventListener('keydown', function (e) {
     switch (e.code) {
         case 'ArrowLeft':
             space.direction = 'left'
-            removeShip()
-            moveSpaceShip()
-            drawShip()
             break
         case 'ArrowRight':
-            space.direction = 'rigth'
-            removeShip()
-            moveSpaceShip()
-            drawShip()
+            space.direction = 'right'
             break
         case 'ArrowUp':
-            shootSpace.direction = 'up'
-            
-            timerId = setInterval(moveShoot ,500)
-            //removeShoot()
-           // drawShoot()
+            if (shootSpace.x === null && shootSpace.y === null) {
+                shootSpace.x = space.x
+                shootSpace.y = space.y - 1
+            }
             break
-        case 'keyup':
-            space.direction = 0
-            shootSpace.direction = 0
-            break
-
     }
 
 })
 
+window.addEventListener('keyup', function (e) {
+    if (e.code === 'ArrowLeft' || e.code === 'ArrowRight') {
+        space.direction = null
+    }
+})
 
 
-var moveAliens = function () {
-    if (left >= 125 || left < 15) { direction *= -1 }
-    left += 10 * direction
-    table.style.left = left + 'px'
-}
 
 
-button.addEventListener('click', function (e) {
+/* button.addEventListener('click', function (e) {
     if (!moving) {
-        timerId = setInterval(moveAliens, 500)
+       // timerId3 = setInterval(moveAliens , 500)
+       moveAliens
     } else {
         clearInterval(timerId)
     }
-})
+}) */
 
-
+startGame()

@@ -22,14 +22,18 @@ body {
     margin-top: 20px;
 }
 
+td {
+    width: 30px;
+    height: 30px;
+}
+
 .aliens {
     width: 30px;
     height: 30px;
     background-color: aliceblue;
-
 }
 
-.spaceShip {
+.spaceShip { 
     bottom: 10px;
     left: 285px;
     background-color: white;
