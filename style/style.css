@@ -9,7 +9,7 @@ body {
 }
 
 #canvas {
-    position: relative;
+    /* position: relative; */
     background-color: black;
     width: 600px;
     height: 600px;
@@ -22,9 +22,6 @@ body {
     margin-top: 20px;
 }
 
-
-
-
 .aliens {
     width: 30px;
     height: 30px;
@@ -33,7 +30,6 @@ body {
 }
 
 .spaceShip {
-    position: absolute;
     bottom: 10px;
     left: 285px;
     background-color: white;
@@ -42,8 +38,8 @@ body {
 }
 
 .shoot{
-    width: 5px;
-    height: 10px;
+    width: 30px;
+    height: 30px;
     background-color: red;
 }
 
@@ -51,3 +47,4 @@ body {
     width: 50px;
     margin: 20px auto;
 }
+
