@@ -1,3 +1,4 @@
+
 var spaceShip = document.querySelector('.spaceShip')
 var shoot = document.getElementsByClassName('shoot')
 var space = new Spaceship()
@@ -53,8 +54,8 @@ function checkHit() {
     
     shootSpace.y = null
     shootSpace.x = null
-    //shootCell.classList.add('boom')
-    //setTimeout(() => shootCell.classList.remove('boom'), 100)
+    shootCell.classList.add('boom')
+    setTimeout(() => shootCell.classList.remove('boom'), 100)
   }
 }
 
@@ -132,4 +133,3 @@ function init() {
 }
 
 init()
-
