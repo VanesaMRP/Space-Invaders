@@ -4,7 +4,7 @@ var timerId3;
 var shoot = document.getElementsByClassName('shoot')
 
 var aliens =  {
-  direction: 1, // 1:derecha, -1:izquierda
+  direction: 1 , // 1:derecha, -1:izquierda
   naves: [
     { x: 4, y: 1 },
     { x: 8, y: 1 },
@@ -24,11 +24,18 @@ var aliens =  {
       alienCell.classList.add('aliens')
     })
   },
-  move: function() {
+  move: function () {
     this.naves.forEach(nave => {
       nave.x = nave.x + (1 * this.direction)
-    })
-  }
+      if (nave.x === 21) {
+        this.direction = -1
+      } 
+    }) 
+    if (this.naves[0].x === 1) {
+      this.direction = 1
+    }
+  },
+
 }
 
 var space = {
@@ -93,7 +100,7 @@ window.addEventListener('keydown', function (e) {
       break;
 
     case 'ArrowRight':
-      if (space.x < 20) { space.x++  }
+      if (space.x < 21) { space.x++  }
       break;
 
     case 'ArrowUp':
@@ -135,7 +142,7 @@ function startGame() {
 }
 
 
-const TABLE_WIDTH = 20
+const TABLE_WIDTH = 21
 const TABLE_HEIGHT = 16
 
 function createTable() {

@@ -10,7 +10,7 @@ body {
 
 #canvas {
     /* position: relative; */
-    background-color: black;
+    background-color: hsl(200,100%,05%);
     width: 900px;
     height: 600px;
     padding: 5px;
@@ -25,7 +25,7 @@ body {
 td {
     width: 30px;
     height: 30px;
-    background-color: hsl(200,100%,50%);
+    background-color: hsl(200,100%,7%);
 }
 
 .aliens {
@@ -39,7 +39,8 @@ td {
 .spaceShip {
     bottom: 10px;
     left: 285px;
-    background-color: white;
+    background-color: rgb(236, 142, 0);
+    border-radius: 2px;
     width: 30px;
     height: 30px;
 }
