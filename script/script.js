@@ -4,7 +4,7 @@ var timerId3;
 var shoot = document.getElementsByClassName('shoot')
 
 var aliens =  {
-  direction: 1, // 1-derecha, 0-izquierda
+  direction: 1, // 1:derecha, -1:izquierda
   naves: [
     { x: 4, y: 1 },
     { x: 8, y: 1 },
@@ -26,7 +26,7 @@ var aliens =  {
   },
   move: function() {
     this.naves.forEach(nave => {
-      nave.x++
+      nave.x = nave.x + (1 * this.direction)
     })
   }
 }
