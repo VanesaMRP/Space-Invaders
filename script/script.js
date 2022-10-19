@@ -3,59 +3,10 @@ var timerId;
 var timerId3;
 var shoot = document.getElementsByClassName('shoot')
 
-var aliens =  {
-  direction: 1 , // 1:derecha, -1:izquierda
-  naves: [
-    { x: 4, y: 1 },
-    { x: 8, y: 1 },
-    { x: 12, y: 1 },
-    { x: 16, y: 1 },
-  ],
-  remove: function() {
-    document
-      .querySelectorAll('.aliens')
-      .forEach(alien => {
-        alien.classList.remove('aliens')
-      })
-  },
-  draw: function() {
-    this.naves.forEach(nave => {
-      var alienCell = document.querySelector(`.row${nave.y} > .col${nave.x}`)
-      alienCell.classList.add('aliens')
-    })
-  },
-  move: function () {
-    this.naves.forEach(nave => {
-      nave.x = nave.x + (1 * this.direction)
-      if (nave.x === 21) {
-        this.direction = -1
-      } 
-    }) 
-    if (this.naves[0].x === 1) {
-      this.direction = 1
-    }
-  },
-
-}
-
-var space = {
-  x: 11,
-  y: 16,
-  draw: function () {
-    var shipCell = document.querySelector(`.row${space.y} > .col${space.x}`)
-    shipCell.classList.add('spaceShip')
-  },
-  remove: function () {
-    var shipCell2 = document.querySelector('.spaceShip')
-    shipCell2.classList.remove('spaceShip')
-  }
-}
-
 var shootSpace = {
   x: 0,
   y: 0
 }
-// mover la nave
 
 // disparar
 function drawShoot() {
@@ -114,9 +65,10 @@ window.addEventListener('keydown', function (e) {
 })
 
 // que comience el juego
-
+var space = new Spaceship()
 function startGame() {
-
+ var aliens = new Aliens()
+ 
   space.draw()
   aliens.draw()
 
@@ -124,14 +76,14 @@ function startGame() {
   var gameTimer = setInterval(function () {
     space.remove()
     space.draw()
-  }, 50)
+  }.bind(this), 50) 
 
   // Move Aliens
   var aliensTimer = setInterval(function () {
     aliens.remove()
     aliens.move()
     aliens.draw()
-  }, 200)
+  }.bind(this), 500)
 
   // Move SpaceShip Shoot
   var gameShoot = setInterval(function () {
@@ -160,7 +112,7 @@ function createTable() {
   }
 }
 
-function init() {
+function init() { 
   createTable()
   document
     .getElementById('start')
