@@ -25,6 +25,7 @@ body {
 td {
     width: 30px;
     height: 30px;
+    background-color: hsl(200,100%,50%);
 }
 
 .aliens {
@@ -49,7 +50,7 @@ td {
     background-color: red;
 }
 
-#start {
+#start-wrapper {
     width: 50px;
     margin: 20px auto;
 }
