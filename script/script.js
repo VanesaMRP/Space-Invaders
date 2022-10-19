@@ -3,7 +3,10 @@ var spaceShip = document.querySelector('.spaceShip')
 var shoot = document.getElementsByClassName('shoot')
 var space = new Spaceship()
 var aliens = new Aliens()
-
+let explosion = document.querySelector('#explode')
+let shooter = document.querySelector('#shooter')
+let music = document.querySelector('#music')
+music.volume = 0.5
 
 var shootSpace = {
   x: 0,
@@ -44,7 +47,7 @@ function removeAliens() {
 function checkHit() {
   var shootCell = document.querySelector('.shoot')
   var counter = document.getElementById('score')
-  
+  shooter.play()
   if (shootCell.classList.contains('aliens')) {
     counter.innerText++
     parseInt(counter)
@@ -56,6 +59,7 @@ function checkHit() {
     shootSpace.x = null
     shootCell.classList.add('boom')
     setTimeout(() => shootCell.classList.remove('boom'), 100)
+    explosion.play()
   }
 }
 
@@ -68,6 +72,7 @@ window.addEventListener('keydown', function (e) {
 
     case 'ArrowRight':
       if (space.x < 21) { space.x++ }
+      
       break;
 
     case 'ArrowUp':
@@ -85,6 +90,7 @@ window.addEventListener('keydown', function (e) {
 function startGame() {
   space.draw()
   aliens.draw()
+  music.play()
 
   // Move SpaceShip
   var gameTimer = setInterval(function () {
@@ -101,6 +107,7 @@ function startGame() {
 
   // Move SpaceShip Shoot
   var gameShoot = setInterval(function () {
+    
     moveShoot()
     checkHit()
   }.bind(this), 10)
