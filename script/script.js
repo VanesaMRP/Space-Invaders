@@ -1,10 +1,7 @@
 var spaceShip = document.querySelector('.spaceShip')
-var timerId;
-var timerId3;
 var shoot = document.getElementsByClassName('shoot')
 var space = new Spaceship()
 var aliens = new Aliens()
-let aliensRemoved = []
 
 
 var shootSpace = {
@@ -27,7 +24,6 @@ function moveShoot() {
   if (shootSpace.y === 0) {
     shootSpace.y = null
     shootSpace.x = null
-    //clearInterval(timerId3)
   } else {
     drawShoot()
     removeShoot()
@@ -37,19 +33,29 @@ function moveShoot() {
 }
 
 // collision and explode
+function removeAliens() {
+  aliens.naves = aliens.naves.filter(function (alien) {
+    return (alien.x !== shootSpace.x || alien.x === shootSpace.x && alien.y !== shootSpace.y )
+  })
+}
+
 
 function checkHit() {
   var shootCell = document.querySelector('.shoot')
+  var counter = document.getElementById('score')
+  
   if (shootCell.classList.contains('aliens')) {
-    shootCell.classList.remove('aliens')
+    counter.innerText++
+    parseInt(counter)
     shootCell.classList.remove('shoot')
-    shootCell.classList.add('noAlien')
-    aliens.
+    shootCell.classList.remove('aliens')
+    removeAliens()
     
-   
-    //shootSpace.y = null
-    //shootSpace.x = null
-  } 
+    shootSpace.y = null
+    shootSpace.x = null
+    //shootCell.classList.add('boom')
+    //setTimeout(() => shootCell.classList.remove('boom'), 100)
+  }
 }
 
 
@@ -60,7 +66,7 @@ window.addEventListener('keydown', function (e) {
       break;
 
     case 'ArrowRight':
-      if (space.x < 21) { space.x++  }
+      if (space.x < 21) { space.x++ }
       break;
 
     case 'ArrowUp':
@@ -83,29 +89,21 @@ function startGame() {
   var gameTimer = setInterval(function () {
     space.remove()
     space.draw()
-  }.bind(this), 50) 
+  }.bind(this), 50)
 
   // Move Aliens
   var aliensTimer = setInterval(function () {
     aliens.remove()
     aliens.move()
     aliens.draw()
-   
-
   }.bind(this), 500)
 
   // Move SpaceShip Shoot
   var gameShoot = setInterval(function () {
     moveShoot()
     checkHit()
-    
-    
-
   }.bind(this), 20)
 }
-
-
-
 
 
 const TABLE_WIDTH = 21
@@ -126,15 +124,12 @@ function createTable() {
   }
 }
 
-function init() { 
+function init() {
   createTable()
   document
     .getElementById('start')
-    .addEventListener('click', () => startGame() )
+    .addEventListener('click', () => startGame())
 }
 
 init()
-
-
-
 
