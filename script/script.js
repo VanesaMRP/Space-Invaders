@@ -103,7 +103,7 @@ function startGame() {
   var gameShoot = setInterval(function () {
     moveShoot()
     checkHit()
-  }.bind(this), 20)
+  }.bind(this), 10)
 }
 
 
