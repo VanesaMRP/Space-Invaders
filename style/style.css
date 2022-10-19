@@ -30,15 +30,17 @@ td {
 }
 
 .aliens {
-    width: 30px;
-    height: 30px;
-    background-color: aliceblue;
+    max-width: 30px;
+    max-height: 30px;
+    background-image:url(../img/Invaders.gif) ;
+     background-repeat: no-repeat;
+    
 }
 
 .boom {
     width: 30px;
     height: 30px;
-    background-color: rgb(255, 208, 0)
+    background-image:url(../img/Explosion.gif )
 }
 
 
@@ -46,7 +48,7 @@ td {
 .spaceShip {
     bottom: 10px;
     left: 285px;
-    background-color: rgb(236, 142, 0);
+    background-image:url(../img/Spaceship.gif);
     border-radius: 2px;
     width: 30px;
     height: 30px;
@@ -55,7 +57,7 @@ td {
 .shoot {
     width: 30px;
     height: 30px;
-    background-color: red;
+    background-image:url(../img/Shoot.gif)
 }
 
 #start-wrapper {
