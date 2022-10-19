@@ -4,7 +4,7 @@ var timerId3;
 var shoot = document.getElementsByClassName('shoot')
 var space = new Spaceship()
 var aliens = new Aliens()
-let aliensRemoved = []
+
 
 
 var shootSpace = {
@@ -37,18 +37,24 @@ function moveShoot() {
 }
 
 // collision and explode
+function removeAliens(){
+  aliens.naves = aliens.naves.filter(function(alien){
+  return (alien.x !== shootSpace.x)
+  })
+  console.log(aliens.naves)
+}
+
 
 function checkHit() {
   var shootCell = document.querySelector('.shoot')
   if (shootCell.classList.contains('aliens')) {
     shootCell.classList.remove('aliens')
     shootCell.classList.remove('shoot')
-    shootCell.classList.add('noAlien')
-    aliens.
-    
-   
-    //shootSpace.y = null
-    //shootSpace.x = null
+    removeAliens()
+    shootSpace.y = null
+    shootSpace.x = null
+    shootCell.classList.add('boom')
+    setTimeout(()=> shootCell.classList.remove('boom'), 100)
   } 
 }
 
@@ -98,6 +104,7 @@ function startGame() {
   var gameShoot = setInterval(function () {
     moveShoot()
     checkHit()
+    
     
     
 
