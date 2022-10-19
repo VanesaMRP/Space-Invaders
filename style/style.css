@@ -33,6 +33,11 @@ td {
     height: 30px;
     background-color: aliceblue;
 }
+.noAlien{
+    width: 30px;
+    height: 30px;
+    background-color: rgb(9, 255, 0)
+}
 
 
 

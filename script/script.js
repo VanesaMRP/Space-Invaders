@@ -2,6 +2,10 @@ var spaceShip = document.querySelector('.spaceShip')
 var timerId;
 var timerId3;
 var shoot = document.getElementsByClassName('shoot')
+var space = new Spaceship()
+var aliens = new Aliens()
+let aliensRemoved = []
+
 
 var shootSpace = {
   x: 0,
@@ -39,10 +43,15 @@ function checkHit() {
   if (shootCell.classList.contains('aliens')) {
     shootCell.classList.remove('aliens')
     shootCell.classList.remove('shoot')
-    shootSpace.y = null
-    shootSpace.x = null
-  }
+    shootCell.classList.add('noAlien')
+    aliens.
+    
+   
+    //shootSpace.y = null
+    //shootSpace.x = null
+  } 
 }
+
 
 window.addEventListener('keydown', function (e) {
   switch (e.code) {
@@ -65,10 +74,8 @@ window.addEventListener('keydown', function (e) {
 })
 
 // que comience el juego
-var space = new Spaceship()
+
 function startGame() {
- var aliens = new Aliens()
- 
   space.draw()
   aliens.draw()
 
@@ -83,15 +90,22 @@ function startGame() {
     aliens.remove()
     aliens.move()
     aliens.draw()
+   
+
   }.bind(this), 500)
 
   // Move SpaceShip Shoot
   var gameShoot = setInterval(function () {
     moveShoot()
     checkHit()
-  }, 200)
+    
+    
 
+  }.bind(this), 20)
 }
+
+
+
 
 
 const TABLE_WIDTH = 21
