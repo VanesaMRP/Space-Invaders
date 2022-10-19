@@ -1,92 +1,135 @@
-var moving = false
-var direction = 1
-var left = 15
-var table = document.getElementById('table');
-var button = document.getElementById('button')
+
 var spaceShip = document.querySelector('.spaceShip')
-var timerId;
 var shoot = document.getElementsByClassName('shoot')
+var space = new Spaceship()
+var aliens = new Aliens()
 
-var space = {
-    x:10,
-    y:16,
-    direction: 'left',
-}
+
 var shootSpace = {
-    x: 10,
-    y: 15,
-    direction: 'up',
-}
-function drawShip(){
-    var shipCell= document.querySelector(`.row${space.y} .col${space.x}`)
-    console.log(shipCell)
-shipCell.classList.add('spaceShip') 
+  x: 0,
+  y: 0
 }
 
-function removeShip(){
-    var shipCell2= document.querySelector('.spaceShip')
-    console.log(shipCell2)
-    shipCell2.classList.remove('spaceShip')
+// disparar
+function drawShoot() {
+  var shootCell = document.querySelector(`.row${shootSpace.y} .col${shootSpace.x}`)
+  shootCell.classList.add('shoot')
 }
 
-function moveSpaceShip () {
-    if(space.direction === 'left' && space.x > 1){
-        space.x --
-        console.log('left')
-    }
-    if(space.direction === 'rigth'&& space.x < 19){
-        space.x ++
-        console.log('right')
-    } 
-    }
-    function shooter (){
-        var shootCell =  document.querySelector(`.row${space.y} .col${space.x}`)
-        console.log(shootCell)
-        shootCell.classList.add('shoot')
-    }
-    function moveShoot(){
-        if(shootSpace.direction === 'up'){
-            shootSpace.y --
-        }
-    }
-window.addEventListener('keydown', function(e){
-    switch (e.code){
-        case 'ArrowLeft':
-        space.direction = 'left'
-        removeShip()
-        moveSpaceShip()
-        drawShip()
-        break 
-        case 'ArrowRight':
-        space.direction = 'rigth'
-        removeShip()
-        moveSpaceShip()
-        drawShip()
-        break
-        case 'keyup':
-        space.direction = 0
-        break
-        case 'spaceBar':
-        shoot.direction = 'up'
-    }
- 
+function removeShoot() {
+  var shootCell = document.querySelector('.shoot')
+  shootCell.classList.remove('shoot')
+}
+
+function moveShoot() {
+  if (shootSpace.y === 0) {
+    shootSpace.y = null
+    shootSpace.x = null
+  } else {
+    drawShoot()
+    removeShoot()
+    shootSpace.y--
+    drawShoot()
+  }
+}
+
+// collision and explode
+function removeAliens() {
+  aliens.naves = aliens.naves.filter(function (alien) {
+    return (alien.x !== shootSpace.x || alien.x === shootSpace.x && alien.y !== shootSpace.y )
+  })
+}
+
+
+function checkHit() {
+  var shootCell = document.querySelector('.shoot')
+  var counter = document.getElementById('score')
+  
+  if (shootCell.classList.contains('aliens')) {
+    counter.innerText++
+    parseInt(counter)
+    shootCell.classList.remove('shoot')
+    shootCell.classList.remove('aliens')
+    removeAliens()
+    
+    shootSpace.y = null
+    shootSpace.x = null
+    shootCell.classList.add('boom')
+    setTimeout(() => shootCell.classList.remove('boom'), 100)
+  }
+}
+
+
+window.addEventListener('keydown', function (e) {
+  switch (e.code) {
+    case 'ArrowLeft':
+      if (space.x > 1) { space.x-- }
+      break;
+
+    case 'ArrowRight':
+      if (space.x < 21) { space.x++ }
+      break;
+
+    case 'ArrowUp':
+      if (shootSpace.x === null && shootSpace.y === null) {
+        shootSpace.x = space.x
+        shootSpace.y = space.y - 1
+      }
+      break
+  }
+
 })
 
+// que comience el juego
 
+function startGame() {
+  space.draw()
+  aliens.draw()
 
-var moveAliens = function (){
-    if(left >= 125 || left < 15) { direction *= -1}
-    left += 10 * direction
-    table.style.left = left + 'px'
+  // Move SpaceShip
+  var gameTimer = setInterval(function () {
+    space.remove()
+    space.draw()
+  }.bind(this), 50)
+
+  // Move Aliens
+  var aliensTimer = setInterval(function () {
+    aliens.remove()
+    aliens.move()
+    aliens.draw()
+  }.bind(this), 500)
+
+  // Move SpaceShip Shoot
+  var gameShoot = setInterval(function () {
+    moveShoot()
+    checkHit()
+  }.bind(this), 20)
 }
 
 
-button.addEventListener('click', function (e){
-    if (!moving){
-        timerId = setInterval(moveAliens, 500)
-    } else {
-        clearInterval(timerId)
+const TABLE_WIDTH = 21
+const TABLE_HEIGHT = 16
+
+function createTable() {
+  const table = document.getElementById('table')
+
+  for (let i = 0; i < TABLE_HEIGHT; i++) {
+    const tr = document.createElement('tr')
+    tr.classList.add(`row${i + 1}`)
+    for (let j = 0; j < TABLE_WIDTH; j++) {
+      const td = document.createElement('td')
+      td.classList.add(`col${j + 1}`)
+      tr.appendChild(td)
     }
-})
+    table.appendChild(tr)
+  }
+}
 
+function init() {
+  createTable()
+  document
+    .getElementById('start')
+    .addEventListener('click', () => startGame())
+}
 
+init()

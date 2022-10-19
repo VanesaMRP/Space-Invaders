@@ -9,45 +9,55 @@ body {
 }
 
 #canvas {
-    position: relative;
-    background-color: black;
-    width: 600px;
+    /* position: relative; */
+    background-color: hsl(200, 100%, 05%);
+    width: 900px;
     height: 600px;
     padding: 5px;
     margin: 0 auto;
 }
 
-#table {
-    position: absolute;
-    margin-top: 20px;
+.space {
+    width: fit-content;
+    margin: 20px auto;
 }
 
-
-
+td {
+    width: 30px;
+    height: 30px;
+    background-color: hsl(200, 100%, 7%);
+}
 
 .aliens {
     width: 30px;
     height: 30px;
     background-color: aliceblue;
-
 }
 
+.boom {
+    width: 30px;
+    height: 30px;
+    background-color: rgb(255, 208, 0)
+}
+
+
+
 .spaceShip {
-    position: absolute;
     bottom: 10px;
     left: 285px;
-    background-color: white;
+    background-color: rgb(236, 142, 0);
+    border-radius: 2px;
     width: 30px;
     height: 30px;
 }
 
-.shoot{
-    width: 5px;
-    height: 10px;
+.shoot {
+    width: 30px;
+    height: 30px;
     background-color: red;
 }
 
-#start {
+#start-wrapper {
     width: 50px;
     margin: 20px auto;
 }
