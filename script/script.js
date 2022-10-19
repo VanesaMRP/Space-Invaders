@@ -141,10 +141,29 @@ function startGame() {
     }, 200)
 
 }
+const TABLE_WIDTH = 20
+const TABLE_HEIGHT = 16
+
+function createTable() {
+  const table = document.getElementById('table')
+
+  for (let i=0; i<TABLE_HEIGHT; i++)  {
+    const tr = document.createElement('tr')
+    tr.classList.add(`row${i+1}`)
+    for (let j=0; j<TABLE_WIDTH; j++)  {
+      const td = document.createElement('td')
+      td.classList.add(`col${j+1}`)
+      tr.appendChild(td)
+    }
+    table.appendChild(tr)
+  }
+}
+createTable()
 
 button.addEventListener('click', function (e) {
     startGame()
     alienMovement()
 })
+
 
 
