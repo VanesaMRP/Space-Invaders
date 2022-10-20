@@ -1,46 +1,49 @@
 body {
     color: white;
+    font-family: 'Silkscreen', cursive;
 }
 
 .top {
     display: inline-block;
     border: 2px solid white;
     padding: 3px;
-    font-family: 'Silkscreen', cursive;
+    margin: 5px;
+    box-shadow: 0 0 20px #4f9;
+
 }
 
 #canvas {
     /* position: relative; */
-    background-image:url(../img/sky.gif);
+    background-image: url(../img/sky.gif);
     width: 900px;
     height: 600px;
-    padding: 5px;
     margin: 0 auto;
+    padding-top: 10px;
 }
 
 .space {
     width: fit-content;
-    margin: 20px auto;
+    margin: 0 auto;
 }
 
 td {
     width: 30px;
     height: 30px;
-    //background-color: hsl(200, 100%, 7%, 50%);
+    /* background-color: hsl(200, 100%, 7%, 50%);  */
 }
 
 .aliens {
     max-width: 30px;
     max-height: 30px;
-    background-image:url(../img/Invaders.gif) ;
-     background-repeat: no-repeat;
-    
+    background-image: url(../img/Invaders.gif);
+    background-repeat: no-repeat;
+
 }
 
 .boom {
     width: 30px;
     height: 30px;
-    background-image:url(../img/Explosion.gif )
+    background-image: url(../img/Explosion.gif )
 }
 
 
@@ -48,7 +51,7 @@ td {
 .spaceShip {
     bottom: 10px;
     left: 285px;
-    background-image:url(../img/Spaceship.gif);
+    background-image: url(../img/Spaceship.gif);
     border-radius: 2px;
     width: 30px;
     height: 30px;
@@ -57,14 +60,60 @@ td {
 .shoot {
     width: 30px;
     height: 30px;
-    background-image:url(../img/Shoot.gif)
+    background-image: url(../img/Shoot.gif)
 }
 
 #start-wrapper {
-    width: 50px;
+    width: fit-content;
     margin: 20px auto;
 }
 
-.inicio{
-background-image:url(../img/sky.gif);
+.inicio {
+    background-image: url(../img/START_GAME.gif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50%;
+
+}
+
+.start {
+    font-family: 'Silkscreen', cursive;
+    color: white;
+    background-color: black;
+    padding: 10px 25px;
+    border-radius: 5px;
+    box-shadow: 0 0 20px #4f9;
+
+}
+
+.start:hover {
+    cursor: pointer;
+    background-color: brown;
+}
+
+.restart {
+    font-family: 'Silkscreen', cursive;
+    color: white;
+    background-color: brown;
+    padding: 10px 25px;
+    border-radius: 5px;
+    box-shadow: 0 0 20px #4f9;
+}
+
+.restart:hover {
+    cursor: pointer;
+}
+
+.gameOver {
+    background-image: url(../img/GAMEOVER.gif);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+.winner {
+    background-image: url(../img/YOUWIN.gif);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50%;
 }

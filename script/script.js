@@ -3,10 +3,14 @@ var spaceShip = document.querySelector('.spaceShip')
 var shoot = document.getElementsByClassName('shoot')
 var space = new Spaceship()
 var aliens = new Aliens()
-let explosion = document.querySelector('#explode')
-let shooter = document.querySelector('#shooter')
-let music = document.querySelector('#music')
-music.volume = 0.5
+let explosion = new Audio('../audio/xplosion.mp3')
+let shooter = new Audio('../audio/shooter.mp3')
+let music = new Audio('../audio/Music.mp3')
+music.volume = 0.05
+music.loop = true
+music.play()
+explosion.volume = 0.2
+shooter.volume = 0.1
 
 var shootSpace = {
   x: 0,
@@ -39,7 +43,7 @@ function moveShoot() {
 // collision and explode
 function removeAliens() {
   aliens.naves = aliens.naves.filter(function (alien) {
-    return (alien.x !== shootSpace.x || alien.x === shootSpace.x && alien.y !== shootSpace.y )
+    return (alien.x !== shootSpace.x || alien.x === shootSpace.x && alien.y !== shootSpace.y)
   })
 }
 
@@ -51,15 +55,21 @@ function checkHit() {
   if (shootCell.classList.contains('aliens')) {
     counter.innerText++
     parseInt(counter)
-    shootCell.classList.remove('shoot')
     shootCell.classList.remove('aliens')
+    shootCell.classList.remove('shoot')
     removeAliens()
-    
     shootSpace.y = null
     shootSpace.x = null
     shootCell.classList.add('boom')
     setTimeout(() => shootCell.classList.remove('boom'), 100)
     explosion.play()
+  }
+  if (counter.innerText === '24') {
+    clearInterval(aliensTimer)
+    clearInterval(gameTimer)
+    clearInterval(gameShoot)
+    document.querySelector('.space')
+      .classList.add('winner')
   }
 }
 
@@ -72,7 +82,6 @@ window.addEventListener('keydown', function (e) {
 
     case 'ArrowRight':
       if (space.x < 21) { space.x++ }
-      
       break;
 
     case 'ArrowUp':
@@ -82,12 +91,31 @@ window.addEventListener('keydown', function (e) {
       }
       break
   }
-
 })
 
 // que comience el juego
 
 function startGame() {
+
+  // inicio juego
+
+  var inicio = document.querySelector('.inicio')
+  inicio.classList.remove('inicio')
+  var button = document.querySelector('.start')
+  button.classList.remove('start')
+  button.classList.add('restart')
+  button.innerText = 'restart'
+  button.addEventListener('click', () => reStart())
+
+  //añadimos el marcador
+
+  var points = document.querySelector('.points')
+  var div = document.createElement('div')
+  div.innerHTML = ` <div class="top"> score <span id="score">0</span></div> `
+  points.appendChild(div)
+
+  //se crean los elementos del juego 
+
   space.draw()
   aliens.draw()
   music.play()
@@ -103,16 +131,27 @@ function startGame() {
     aliens.remove()
     aliens.move()
     aliens.draw()
-  }.bind(this), 500)
+
+  }.bind(this), 200)
 
   // Move SpaceShip Shoot
   var gameShoot = setInterval(function () {
-    
     moveShoot()
     checkHit()
   }.bind(this), 10)
-}
 
+  //condicion de partida perdida
+
+  var gameLose = setInterval(function () {
+    if (aliens.checkLose()) {
+      clearInterval(aliensTimer)
+      clearInterval(gameTimer)
+      clearInterval(gameShoot)
+      document.querySelector('.space')
+        .classList.add('gameOver')
+    }
+  }, 100)
+}
 
 const TABLE_WIDTH = 21
 const TABLE_HEIGHT = 16
@@ -130,13 +169,21 @@ function createTable() {
     }
     table.appendChild(tr)
   }
+
 }
+
+function reStart() {
+  document.location.reload()
+}
+
 
 function init() {
   createTable()
+
   document
-    .getElementById('start')
+    .querySelector('.start')
     .addEventListener('click', () => startGame())
+
 }
 
 init()
