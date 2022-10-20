@@ -3,9 +3,9 @@ var spaceShip = document.querySelector('.spaceShip')
 var shoot = document.getElementsByClassName('shoot')
 var space = new Spaceship()
 var aliens = new Aliens()
-let explosion = new Audio('../audio/xplosion.mp3')
-let shooter = new Audio('../audio/shooter.mp3')
-let music = new Audio('../audio/Music.mp3')
+let explosion = new Audio('audio/xplosion.mp3')
+let shooter = new Audio('audio/shooter.mp3')
+let music = new Audio('audio/Music.mp3')
 music.volume = 0.05
 music.loop = true
 music.play()
