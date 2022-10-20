@@ -1,34 +1,35 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style/style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com/%22%3E >
+  <link rel="preconnect" href="https://fonts.googleapis.com/%22%3E">
   <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-  <audio id="explode" src="../Space-Invaders/audio/xplosion.mp3"></audio>
-  <audio id="music" src="../Space-Invaders/audio/Music.mp3"></audio>
-  <audio id="shooter" src="../Space-Invaders/audio/shooter.mp3"></audio>
-<link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet">
   <title>Space Invaders</title>
 </head>
 
 <body>
   <div id="canvas">
-    <div>
-      <div class="top"> score <span id="score">0</span></div>
-    </div>
+    <section class="inicio">
+      <!-- Creamos el contador de puntos al comenzar la partida -->
+      <div class="points"></div>
 
-    <div class="space">
-      <table id="table"></table>
-    </div>
+      <div class="space ">
+        <!-- La tabla que contiene aliens y la nave se crea al iniciar el juego -->
+        <table id="table"></table>
+      </div>
   </div>
 
   <div id="start-wrapper">
-    <button id="start">Start</button>
+    <!-- El único botón tendrá la función de comenzar el juego desde el inicio o después -->
+    <button class="start">Start</button>
   </div>
+  </section>
+
   <script src="script/spaceship.js"></script>
   <script src="script/aliens.js"></script>
   <script src="script/script.js"></script>
