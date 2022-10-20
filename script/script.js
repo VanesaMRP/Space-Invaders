@@ -12,6 +12,8 @@ music.play()
 explosion.volume = 0.2
 shooter.volume = 0.1
 
+var alienCounter = 0
+
 var shootSpace = {
   x: 0,
   y: 0
@@ -51,9 +53,10 @@ function removeAliens() {
 function checkHit() {
   var shootCell = document.querySelector('.shoot')
   var counter = document.getElementById('score')
-  shooter.play()
+  
   if (shootCell.classList.contains('aliens')) {
     counter.innerText++
+    alienCounter++
     parseInt(counter)
     shootCell.classList.remove('aliens')
     shootCell.classList.remove('shoot')
@@ -64,13 +67,7 @@ function checkHit() {
     setTimeout(() => shootCell.classList.remove('boom'), 100)
     explosion.play()
   }
-  if (counter.innerText === '24') {
-    clearInterval(aliensTimer)
-    clearInterval(gameTimer)
-    clearInterval(gameShoot)
-    document.querySelector('.space')
-      .classList.add('winner')
-  }
+
 }
 
 
@@ -88,6 +85,9 @@ window.addEventListener('keydown', function (e) {
       if (shootSpace.x === null && shootSpace.y === null) {
         shootSpace.x = space.x
         shootSpace.y = space.y - 1
+        shooter.pause()
+        shooter.currentTime = 0
+        shooter.play()
       }
       break
   }
@@ -138,6 +138,13 @@ function startGame() {
   var gameShoot = setInterval(function () {
     moveShoot()
     checkHit()
+    if (alienCounter === 24) {
+      document.querySelector('.space').classList.add('winner')
+      clearInterval(aliensTimer)
+      clearInterval(gameTimer)
+      clearInterval(gameShoot) 
+    }
+
   }.bind(this), 10)
 
   //condicion de partida perdida
@@ -173,6 +180,7 @@ function createTable() {
 }
 
 function reStart() {
+
   document.location.reload()
 }
 
